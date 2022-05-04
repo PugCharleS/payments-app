@@ -7,6 +7,7 @@ import { Home } from "./components/Home";
 import NavBar from "./components/NavBar";
 import { Error404 } from "./components/Error404";
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class App extends Component {
   constructor(props) {

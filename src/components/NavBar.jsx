@@ -1,16 +1,23 @@
 import { Component } from "react";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import '../../src/App.css'
 
 export default class NavBar extends Component {
     render() {
         return (
             <div>
-                <ol>
-                    <Link to="/">Home</Link>
-                    <Link to="/all-orders">All Orders</Link>
-                    <Link to="/payments-due">Payments Due</Link>
-                    <Link to="/payments-made">Payments Made</Link>
-                </ol>
+
+                <Navbar bg="dark" variant="dark" className="navbar">
+                    <Container>
+                        <Navbar.Brand><Link to="/" className="home_link">Home</Link></Navbar.Brand>
+                        <Nav className="me-auto">
+                            <Nav.Link><Link to="/all-orders" className="link">All Orders</Link></Nav.Link>
+                            <Nav.Link><Link to="/payments-due" className="link">Payments Due</Link></Nav.Link>
+                            <Nav.Link><Link to="/payments-made" className="link">Payments Made</Link></Nav.Link>
+                        </Nav>
+                    </Container>
+                </Navbar>
             </div>
         )
     }

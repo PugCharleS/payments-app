@@ -1,5 +1,9 @@
 import moment from "moment";
 import { Component } from "react";
+import { Badge, Container, Table } from "react-bootstrap";
+import { CartesianGrid, Line, LineChart, Tooltip, XAxis } from "recharts";
+import '../../src/App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export class Home extends Component {
     constructor(props) {
@@ -23,23 +27,28 @@ export class Home extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Home</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Total Orders</th>
-                            <th>Total Payment Due</th>
-                            <th>Total Payment Made</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <td>{this.state.orders.length}</td>
-                        <td>{this.sumPayments()[0]}</td>
-                        <td>{this.sumPayments()[1]}</td>
-                    </tbody>
-                </table>
+            <div className="body">
+                <Container className="container-sec">
+                <Badge bg="light" text="dark" >
+                    <p className="title">Summary</p>
+                </Badge>{' '}
                 <br/><br/><br/>
+                    <Table striped bordered hover size="sm" variant="dark">
+                        <thead>
+                            <tr>
+                                <th>Total Orders</th>
+                                <th>Total Payment Due</th>
+                                <th>Total Payment Made</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td>{this.state.orders.length}</td>
+                            <td>{this.sumPayments()[0]}</td>
+                            <td>{this.sumPayments()[1]}</td>
+                        </tbody>
+                    </Table>
+                    <br/><br/><br/>
+                </Container>
             </div>
         )
     }
