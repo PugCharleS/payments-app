@@ -5,7 +5,7 @@ export class PaymentsMade extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          orders: this.props.orders,
+            orders: this.props.orders,
         }
     }
 

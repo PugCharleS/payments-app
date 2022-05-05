@@ -15,6 +15,8 @@ export default class NavBar extends Component {
                             <Nav.Link><Link to="/all-orders" className="link">All Orders</Link></Nav.Link>
                             <Nav.Link><Link to="/payments-due" className="link">Payments Due</Link></Nav.Link>
                             <Nav.Link><Link to="/payments-made" className="link">Payments Made</Link></Nav.Link>
+                            <Nav.Link><Link to="/add-user" className="link">Add User</Link></Nav.Link>
+                            <Nav.Link><Link to="/users" className="link">Users</Link></Nav.Link>
                         </Nav>
                     </Container>
                 </Navbar>
