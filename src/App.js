@@ -13,6 +13,10 @@ import { AddUser } from "./components/AddUser";
 import { Users } from "./components/Users";
 import { AddProject } from "./components/AddProject";
 import { Projects } from "./components/Projects";
+import { AddVendor } from "./AddVendor";
+import { Vendors } from "./components/Vendors";
+import AddOrder from "./components/AddOrder";
+import { Orders } from "./components/Orders";
 
 export default class App extends Component {
   constructor(props) {
@@ -20,6 +24,8 @@ export default class App extends Component {
     this.state = {
       users: [],
       projects: [],
+      vendors: [],
+      orders: [],
     };
   }
 
@@ -49,6 +55,24 @@ export default class App extends Component {
       .then((data) => {
         this.setState({
           projects: data,
+        });
+      });
+
+    // Fetching Vendors
+    fetch("http://localhost:8881/vendor")
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          vendors: data,
+        });
+      });
+
+    // Fetching Orders
+    fetch("http://localhost:8881/order")
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          orders: data,
         });
       });
   }
@@ -98,16 +122,61 @@ export default class App extends Component {
     this.setState({ users: projectArry });
   };
 
+  addVendor = (vendor) => {
+    let vendorArry = this.state.vendors;
+
+    fetch(`http://localhost:8881/vendor/add`, {
+      method: "POST",
+      body: JSON.stringify({
+        name: vendor.name,
+        address: vendor.address,
+        city: vendor.city,
+        contact: vendor.contact,
+        email: vendor.email,
+        specs: vendor.specs,
+      }),
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => vendorArry.push(data));
+
+    this.setState({ vendors: vendorArry });
+  };
+
+  addOrder = (order, vid, pid) => {
+    let orderArry = this.state.orders;
+
+    fetch(`http://localhost:8881/order/${vid}/${pid}`, {
+      method: "POST",
+      body: JSON.stringify({
+        orderDetails: order.orderDetails,
+        expectedDateOfFulfillment: order.expectedDateOfFulfillment,
+        amount: order.amount,
+      }),
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => orderArry.push(data));
+
+    this.setState({ orders: orderArry });
+  };
+
   render() {
     return (
       <div>
         <NavBar />
         <Routes>
           <Route path="/" element={<Home orders={this.state.data} />} />
+
           <Route
             path="/all-orders"
             element={<AllOrders orders={this.state.data} />}
           />
+
           <Route
             path="/payments-due"
             element={<PaymentsDue orders={this.state.data} />}
@@ -116,11 +185,13 @@ export default class App extends Component {
             path="/payments-made"
             element={<PaymentsMade orders={this.state.data} />}
           />
+
           <Route
             path="/add-user"
             element={<AddUser addUser={this.addUser} />}
           />
           <Route path="/users" element={<Users users={this.state.users} />} />
+
           <Route
             path="/add-project"
             element={<AddProject addProject={this.addProject} />}
@@ -129,6 +200,37 @@ export default class App extends Component {
             path="/projects"
             element={<Projects projects={this.state.projects} />}
           />
+
+          <Route
+            path="/add-vendor"
+            element={<AddVendor addVendor={this.addVendor} />}
+          />
+          <Route
+            path="/vendors"
+            element={<Vendors vendors={this.state.vendors} />}
+          />
+
+          <Route
+            path="/add-order"
+            element={
+              <AddOrder
+                addOrder={this.addOrder}
+                vendors={this.state.vendors}
+                projects={this.state.projects}
+              />
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <Orders
+                vendors={this.state.vendors}
+                projects={this.state.projects}
+                orders={this.state.orders}
+              />
+            }
+          />
+
           <Route path="*" element={<Error404 />} />
         </Routes>
         <Dashboard orders={this.state.data} />

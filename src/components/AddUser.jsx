@@ -39,8 +39,9 @@ export class AddUser extends Component {
           <Form.Group className="mb-3">
             <Form.Label>Account Type</Form.Label>
             <Form.Select name="accountType" onChange={this.onChangeHandler} >
-              <option>savings</option>
-              <option>business</option>
+              <option value="">---select account type---</option>
+              <option value={"savings"}>savings</option>
+              <option value={"business"}>business</option>
             </Form.Select>
             {/* <Form.Control type="text" placeholder="business or savings" name="accountType" onChange={this.onChangeHandler}  /> */}
           </Form.Group>
