@@ -19,7 +19,7 @@ export class AddUser extends Component {
 
   render() {
     return(
-      <Container>
+      <Container className="container-sec">
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Name</Form.Label>
@@ -38,7 +38,11 @@ export class AddUser extends Component {
 
           <Form.Group className="mb-3">
             <Form.Label>Account Type</Form.Label>
-            <Form.Control type="text" placeholder="business or savings" name="accountType" onChange={this.onChangeHandler} />
+            <Form.Select name="accountType" onChange={this.onChangeHandler} >
+              <option>savings</option>
+              <option>business</option>
+            </Form.Select>
+            {/* <Form.Control type="text" placeholder="business or savings" name="accountType" onChange={this.onChangeHandler}  /> */}
           </Form.Group>
 
           <Form.Group className="mb-3">
