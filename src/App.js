@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router";
 import { Component } from "react";
-import { AllOrders } from "./components/AllOrders";
 import { PaymentsDue } from "./components/PaymentsDue";
 import { PaymentsMade } from "./components/PaymentsMade";
 import { Home } from "./components/Home";
@@ -13,7 +12,7 @@ import { AddUser } from "./components/AddUser";
 import { Users } from "./components/Users";
 import { AddProject } from "./components/AddProject";
 import { Projects } from "./components/Projects";
-import { AddVendor } from "./AddVendor";
+import { AddVendor } from "./components/AddVendor";
 import { Vendors } from "./components/Vendors";
 import AddOrder from "./components/AddOrder";
 import { Orders } from "./components/Orders";
@@ -169,13 +168,14 @@ export default class App extends Component {
     return (
       <div>
         <NavBar />
+        {/* <SideBar /> */}
         <Routes>
           <Route path="/" element={<Home orders={this.state.data} />} />
 
-          <Route
+          {/* <Route
             path="/all-orders"
             element={<AllOrders orders={this.state.data} />}
-          />
+          /> */}
 
           <Route
             path="/payments-due"
@@ -188,7 +188,9 @@ export default class App extends Component {
 
           <Route
             path="/add-user"
-            element={<AddUser addUser={this.addUser} />}
+            element={
+              <AddUser addUser={this.addUser} users={this.state.users} />
+            }
           />
           <Route path="/users" element={<Users users={this.state.users} />} />
 
@@ -233,7 +235,7 @@ export default class App extends Component {
 
           <Route path="*" element={<Error404 />} />
         </Routes>
-        <Dashboard orders={this.state.data} />
+        {/* <Dashboard orders={this.state.data} /> */}
       </div>
     );
   }
